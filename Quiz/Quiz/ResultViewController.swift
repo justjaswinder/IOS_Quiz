@@ -34,10 +34,10 @@ class ResultViewController: UIViewController {
         resText.text = String(result) + "/5"
         
         if(result < 3){
-            retryBtn.isHidden = false
+      //      retryBtn.isHidden = false
         performText.text = "Please try again!"
         }else{
-                  retryBtn.isHidden = true
+           //       retryBtn.isHidden = true
         }
         if(result == 3){
           

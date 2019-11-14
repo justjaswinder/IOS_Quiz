@@ -23,7 +23,7 @@ class Database{
    static   var optionsQ2 = ["Document Of Model","Document Object Model","Data Of Model","Data Object Model"]
     
   static   var quiz3 = "What is resolution of iPad Min in portrait mode?"
-   static  var ans3Num = 1
+   static  var ans3Num = 0
 //    1024X768
 
    static   var optionsQ3 = ["1024X768","1280X720","720X1280","768X1024"]
