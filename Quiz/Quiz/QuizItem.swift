@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QuizItem {
+class QuizItem: NSCoder,Codable{
     var quiz = ""
     var quizANS = 0
     var quizOptArr = [String]()
