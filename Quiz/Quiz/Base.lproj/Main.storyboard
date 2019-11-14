@@ -10,7 +10,7 @@
         <!--Os Quiz View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="IOsQuizViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IOsQuizViewController" id="BYZ-38-t0r" customClass="IOsQuizViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,10 +121,53 @@
                     <view key="view" contentMode="scaleToFill" id="Bxx-Pz-2EX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WfS-jg-rdH">
+                                <rect key="frame" x="0.0" y="298" width="414" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5/5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8x-OW-30Q">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="98.5"/>
+                                        <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="45"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR2-pW-Qe9">
+                                        <rect key="frame" x="0.0" y="100.5" width="414" height="99"/>
+                                        <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="35"/>
+                                        <color key="textColor" red="0.23546943031997081" green="0.47761496113989632" blue="0.19199360856749986" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zl-LR-tQZ">
+                                        <rect key="frame" x="0.0" y="201.5" width="414" height="98.5"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="28"/>
+                                        <state key="normal" title="RETRY">
+                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retryPress:" destination="hdn-pI-xaB" eventType="touchUpInside" id="Gic-6j-vJS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="cK0-sm-KsC"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WfS-jg-rdH" firstAttribute="centerX" secondItem="Bxx-Pz-2EX" secondAttribute="centerX" id="Lok-2x-4PJ"/>
+                            <constraint firstItem="IzK-p5-Z0G" firstAttribute="trailing" secondItem="WfS-jg-rdH" secondAttribute="trailing" id="TaU-jD-oC5"/>
+                            <constraint firstItem="WfS-jg-rdH" firstAttribute="leading" secondItem="IzK-p5-Z0G" secondAttribute="leading" id="ma5-wd-DFS"/>
+                            <constraint firstItem="WfS-jg-rdH" firstAttribute="centerY" secondItem="Bxx-Pz-2EX" secondAttribute="centerY" id="zGL-8n-LtU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="IzK-p5-Z0G"/>
                     </view>
                     <navigationItem key="navigationItem" id="0UR-VB-5Uk"/>
+                    <connections>
+                        <outlet property="performText" destination="cR2-pW-Qe9" id="6Uj-ge-HFp"/>
+                        <outlet property="resText" destination="Y8x-OW-30Q" id="gay-nL-oMI"/>
+                        <outlet property="retryBtn" destination="6Zl-LR-tQZ" id="TUD-S1-VAZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzm-9u-qdr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

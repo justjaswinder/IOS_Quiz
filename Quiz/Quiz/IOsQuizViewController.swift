@@ -11,8 +11,8 @@ import UIKit
 class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     var quizNum = 0
-    var quizList  = [QuizItem]()
-    
+    var selectedQuizList  = [QuizItem]()
+   var quizList  = [QuizItem]()
     @IBOutlet weak var tableQuizOptions: UITableView!
     
     @IBOutlet weak var nextButton: UIButton!
@@ -21,10 +21,25 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     @IBAction func nextPress(_ sender: Any) {
       //  startView.isHidden = true
+        var isAllFalse = false
+        for i in 0 ..< selectedQuizList[quizNum].quizOptArrCLICK.count{
+            
+            if(selectedQuizList[quizNum].quizOptArrCLICK[i] == true){
+               isAllFalse = true
+            }
+            
+        }
+        if(!(isAllFalse)){
+            let alert = UIAlertController(title: "Alert", message: "Please Give your Answer", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         if(quizNum < 5){
         quizNum += 1
         tableQuizOptions.reloadData()
-            quizLabel.text = quizList[quizNum].quiz}
+            quizLabel.text = selectedQuizList[quizNum].quiz}
             if(quizNum == 4){
                 nextButton.setTitle("COMPLETED", for: UIControl.State.normal)
                         //quizNum += 1
@@ -34,13 +49,14 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
             if( quizNum == 5 ){
                 var resCOUNT = 0
                 for i in 0 ..< 5 {
-                    if(quizList[i].quizANS == quizList[i].myANS){
+                    if(selectedQuizList[i].quizANS == selectedQuizList[i].myANS){
                         resCOUNT += 1
                     }
                 }
                 print("score = \(resCOUNT)")
                 if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
                                // viewController.keyBoolean = selectedItem
+                    vc.result = resCOUNT
                                if let navi = navigationController {
                                    navi.pushViewController(vc, animated: true)
                                }
@@ -121,20 +137,37 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
         qItem10.quizOptArr = Database.optionsQ10
         quizList.append(qItem10)
 
+        
+        var indexAlreadySelected = [Int]()
+        
+        for _ in 0 ..< 6 {
+            
+            repeat{
+                let number = Int.random(in: 0 ..< quizList.count)
+                
+                if !indexAlreadySelected.contains(number){
+                    indexAlreadySelected.append(number)
+                    selectedQuizList.append(quizList[number])
+                    break
+                }
+                
+            }while(true)
+            
+        }
         super.init(coder : aDecoder)
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return quizList[quizNum].quizOptArr.count
+        return selectedQuizList[quizNum].quizOptArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        quizLabel.text = quizList[quizNum].quiz
+        quizLabel.text = selectedQuizList[quizNum].quiz
         let cell = tableView.dequeueReusableCell(withIdentifier:  "QuizItem") as! OptionItemView
-        cell.textLabel!.text = quizList[quizNum].quizOptArr[indexPath.row]
+        cell.textLabel!.text = selectedQuizList[quizNum].quizOptArr[indexPath.row]
         cell.accessoryType = .none
      
         return cell
@@ -143,11 +176,12 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        
-           quizList[quizNum].myANS = indexPath.row
+        selectedQuizList[quizNum].quizOptArrCLICK[indexPath.row] = true
+           selectedQuizList[quizNum].myANS = indexPath.row
         
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selectedQuizList[quizNum].quizOptArrCLICK[indexPath.row] = false
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
      
     }
@@ -155,6 +189,7 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.setHidesBackButton(true, animated: false)
         tableQuizOptions.delegate = self
         tableQuizOptions.dataSource = self
         // Do any additional setup after loading the view.

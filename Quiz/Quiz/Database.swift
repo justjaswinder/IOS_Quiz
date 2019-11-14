@@ -67,10 +67,13 @@ class Database{
    
   static    var optionsQ9 = ["With IdentifierId","With Instruments","With Recycle()","With UITableView"]
     
-  static   var quiz10 = "How can we use a reusable cell in UITableview?"
-  static   var ans10Num = 1
+  static   var quiz10 = "Which are the app specific objects that stores the app's content?"
+  static   var ans10Num = 3
    
    // By using dequeReusableCellWithIdentifier
  
-    static  var optionsQ10 = ["By using dequeReusableCellWithId","By using dequeReusableCellWithIdentifier","By using dequeReusableWithId","By using dequeReusableWithIdentifier"]
+ //Data model objects
+ 
+ 
+    static  var optionsQ10 = ["Delegates","Class Objects","Data Driven objects","Data model objects"]
 }
