@@ -12,5 +12,5 @@ class QuizItem {
     var quiz = ""
     var quizANS = 0
     var quizOptArr = [String]()
-    
+    var myANS = 20
 }

@@ -21,14 +21,35 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     @IBAction func nextPress(_ sender: Any) {
       //  startView.isHidden = true
-        if(quizNum < 4){
+        if(quizNum < 5){
         quizNum += 1
         tableQuizOptions.reloadData()
-            quizLabel.text = quizList[quizNum].quiz
+            quizLabel.text = quizList[quizNum].quiz}
             if(quizNum == 4){
                 nextButton.setTitle("COMPLETED", for: UIControl.State.normal)
+                        //quizNum += 1
+                return
             }
-        }
+            
+            if( quizNum == 5 ){
+                var resCOUNT = 0
+                for i in 0 ..< 5 {
+                    if(quizList[i].quizANS == quizList[i].myANS){
+                        resCOUNT += 1
+                    }
+                }
+                print("score = \(resCOUNT)")
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+                               // viewController.keyBoolean = selectedItem
+                               if let navi = navigationController {
+                                   navi.pushViewController(vc, animated: true)
+                               }
+                           }
+
+
+            }
+            
+        
     }
     
     required init?(coder aDecoder : NSCoder){
@@ -114,12 +135,24 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
         quizLabel.text = quizList[quizNum].quiz
         let cell = tableView.dequeueReusableCell(withIdentifier:  "QuizItem") as! OptionItemView
         cell.textLabel!.text = quizList[quizNum].quizOptArr[indexPath.row]
+        cell.accessoryType = .none
+     
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 70
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+           quizList[quizNum].myANS = indexPath.row
+        
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+     
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableQuizOptions.delegate = self
