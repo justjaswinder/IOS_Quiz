@@ -10,6 +10,7 @@ import UIKit
 
 class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var queCountLbl: UILabel!
     var quizNum = 0
     var selectedQuizList  = [QuizItem]()
     var quizList  = [QuizItem]()
@@ -55,6 +56,8 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 //  }
                 if(self.quizNum < 5){
                     self.quizNum += 1
+                    let num = self.quizNum + 1
+                    self.queCountLbl.text = "\(num)/5"
                     self.tableQuizOptions.reloadData()
                     self.quizLabel.text = self.selectedQuizList[self.quizNum].quiz }
                 
