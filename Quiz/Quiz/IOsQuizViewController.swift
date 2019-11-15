@@ -14,9 +14,9 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var quizNum = 0
     var selectedQuizList  = [QuizItem]()
     var quizList  = [QuizItem]()
-    @IBOutlet weak var tableQuizOptions: UITableView!
     
-    @IBOutlet weak var ansImage: UIImageView!
+    @IBOutlet weak var tableQuizOptions: UITableView!
+        @IBOutlet weak var ansImage: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var startView: UIView!
     @IBOutlet weak var quizLabel: UILabel!
@@ -53,23 +53,30 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
             + .milliseconds(800)) {
                 
                 self.ansImage.isHidden = true
-                //  }
-                if(self.quizNum < 5){
+              
+                if(self.quizNum < 5)
+                {
+                    
                     self.quizNum += 1
+                    
                     let num = self.quizNum + 1
                     self.queCountLbl.text = "\(num)/5"
+                    
                     self.tableQuizOptions.reloadData()
-                    self.quizLabel.text = self.selectedQuizList[self.quizNum].quiz }
+                    self.quizLabel.text = self.selectedQuizList[self.quizNum].quiz
+                    
+                }
                 
                 
-                if(self.quizNum == 4){
+                if(self.quizNum == 4)
+                {
                                                             
-                    self.nextButton.setTitle("COMPLETED", for: UIControl.State.normal)
-                    //quizNum += 1
+                    self.nextButton.setTitle("FINISH", for: UIControl.State.normal)
                     return
                 }
                 
-                if( self.quizNum == 5 ){
+                if( self.quizNum == 5 )
+                {
                     var resCOUNT = 0
                     for i in 0 ..< 5 {
                         if(self.selectedQuizList[i].quizANS == self.selectedQuizList[i].myANS){
@@ -78,18 +85,18 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     }
                     
                     
-                    
-                    
-                    
-                    //  }
                     self.ansImage.isHidden = true
                     
                     print("score = \(resCOUNT)")
+                    
                     if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
-                        // viewController.keyBoolean = selectedItem
+                       
                         vc.result = resCOUNT
+                        
                         if let navi = self.navigationController {
+                            
                             navi.pushViewController(vc, animated: true)
+                            
                         }
                     }
                     
@@ -175,28 +182,31 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         
         super.init(coder : aDecoder)
+        
         print("Documents folder is \(documentsDirectory())")
         print("Data file path is \(dataFilePath())")
         
         
         loadChecklistItems()
         
-        var indexAlreadySelected = [Int]()
+        var idxArr = [Int]()
         
         for _ in 0 ..< 6 {
             
             repeat{
-                let number = Int.random(in: 0 ..< quizList.count)
+                let randomIndex = Int.random(in: 0 ..< quizList.count)
                 
-                if !indexAlreadySelected.contains(number){
-                    indexAlreadySelected.append(number)
-                    selectedQuizList.append(quizList[number])
+                if !idxArr.contains(randomIndex)
+                {
+                    idxArr.append(randomIndex)
+                    selectedQuizList.append(quizList[randomIndex])
                     break
                 }
                 
             }while(true)
             
         }
+        
         //    saveChecklistItems()
     }
     
@@ -213,10 +223,11 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
             catch
             {
-                
                 print("Error decoding item array!")
             }
         } }
+    
+    
     func dataFilePath() -> URL {
         
         return documentsDirectory().appendingPathComponent("allData.plist")
@@ -234,8 +245,6 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let encoder = PropertyListEncoder()
         // 2
         do {
-            //  raywenderlich.com 328
-            //iOS Apprentice Chapter 15: Saving and Loading
             // 3
             let data = try encoder.encode(quizList)
             // 4
@@ -284,7 +293,6 @@ class IOsQuizViewController: UIViewController,UITableViewDelegate,UITableViewDat
         navigationItem.setHidesBackButton(true, animated: false)
         tableQuizOptions.delegate = self
         tableQuizOptions.dataSource = self
-        // Do any additional setup after loading the view.
     }
     
     

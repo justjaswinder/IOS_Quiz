@@ -64,13 +64,13 @@
 			children = (
 				9B56CFDD237B16C400AF8781 /* AppDelegate.swift */,
 				9B56CFDF237B16C400AF8781 /* SceneDelegate.swift */,
-				9B56CFE1237B16C400AF8781 /* IOsQuizViewController.swift */,
 				9B56CFE3237B16C400AF8781 /* Main.storyboard */,
 				9B56CFE6237B16C500AF8781 /* Assets.xcassets */,
 				9B56CFE8237B16C500AF8781 /* LaunchScreen.storyboard */,
 				9B56CFEB237B16C500AF8781 /* Info.plist */,
 				9B56CFF1237B25A000AF8781 /* Database.swift */,
 				9B56CFF3237B2D1200AF8781 /* QuizItem.swift */,
+				9B56CFE1237B16C400AF8781 /* IOsQuizViewController.swift */,
 				9BB176BC237DBD7D004F7359 /* ResultViewController.swift */,
 			);
 			path = Quiz;

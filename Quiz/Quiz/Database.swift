@@ -15,6 +15,7 @@ class Database{
    // Accelerometer
      static   var optionsQ1 = ["Shadow detector","Rotator","Accelerometer","Special Sensor"]
     
+    
   static   var quiz2 = "What does DOM stands for?"
    static  var ans2Num = 1
 

@@ -12,6 +12,7 @@ class ResultViewController: UIViewController {
     var result = 0
     @IBOutlet weak var retryBtn: UIButton!
     @IBOutlet weak var resText: UILabel!
+    
     @IBAction func retryPress(_ sender: Any) {
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "IOsQuizViewController") as? IOsQuizViewController {
                                      // viewController.keyBoolean = selectedItem
@@ -23,6 +24,7 @@ class ResultViewController: UIViewController {
         
     }
     @IBOutlet weak var performText: UILabel!
+    
     //    Score 0/5, 1/5 and 2/5 Message => “Please try again!”
 //    Score 3/5 Message => “Good job!”
 //    Score 4/5 Message => “Excellent work!”
@@ -53,14 +55,5 @@ class ResultViewController: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
